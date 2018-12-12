@@ -1,0 +1,16 @@
+ANN:
+Test score:  0.02283382962923497
+Test accuracy:  0.98828125
+[[223   2]
+ [  1  30]]
+
+
+DNN:
+Test score:  0.028225936330272816
+Test accuracy:  0.9921875
+[[220   1]
+ [  1  34]]
+
+
+DCNN:
+
