@@ -54,8 +54,8 @@ class CNN(object):
         model.add(Conv2D(self.N_HIDDEN, (3, 3), padding='same', input_shape=(self.IMG_ROWS, self.IMG_COLS, 1)))
         model.add(Activation('relu'))
         model.add(Flatten())
-        # model.add(Dense(32))
-        # model.add(Activation('relu'))
+        model.add(Dense(32))
+        model.add(Activation('relu'))
         model.add(Dense(2))
         model.add(Activation('softmax'))
 
