@@ -2,11 +2,11 @@ import vtk
 from vtk.util import numpy_support
 import os
 import numpy as np
-import nrrd
+#import nrrd
 from matplotlib import pyplot, cm
 import cv2
 
-
+"""
 def read_nrrd_to_images():
     data_folder_name = './AutomatedSegmentation/case'
     store_folder_name = './images/'
@@ -32,7 +32,7 @@ def read_nrrd_to_images():
             if not os.path.isdir(tmp_path_2):
                 os.makedirs(tmp_path_2)
             cv2.imwrite(tmp_path_2 + str(i) + str(j) + '.jpg', data[:, :, j])
-
+"""
 
 def get_labels(case):
     data = np.zeros(256)
