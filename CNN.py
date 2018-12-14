@@ -20,10 +20,10 @@ from sklearn.metrics import confusion_matrix
 class CNN(object):
     def __init__(self, X, Y, testsize=.10):
         self.NB_EPOCH = 20
-        self.BATCH_SIZE = 300
+        self.BATCH_SIZE = 128
         self.VERBOSE = 1
         self.NB_CLASSES = 2
-        self.OPTIMIZER = Adam()
+        self.OPTIMIZER = RMSprop()
         self.N_HIDDEN = 64
         self.VALIDATION_SPLIT = 0.13
 
@@ -53,14 +53,17 @@ class CNN(object):
         model = Sequential()
         model.add(Conv2D(self.N_HIDDEN, (3, 3), padding='same', input_shape=(self.IMG_ROWS, self.IMG_COLS, 1)))
         model.add(Activation('relu'))
+        model.add(MaxPooling2D(pool_size=(2, 2)))
+        model.add(Dropout(0.25))
         model.add(Flatten())
-        model.add(Dense(32))
+        model.add(Dense(512))
         model.add(Activation('relu'))
+        model.add(Dropout(0.5))
         model.add(Dense(2))
         model.add(Activation('softmax'))
 
 
-        model.compile(optimizer=self.OPTIMIZER, loss='mse', metrics=['accuracy'])
+        model.compile(optimizer=self.OPTIMIZER, loss='categorical_crossentropy', metrics=['accuracy'])
         model.summary()
 
         # history = model.fit(self.X_train, self.Y_train,
@@ -77,6 +80,9 @@ class CNN(object):
         #
         # conv_matrix = confusion_matrix(self.Y_test, y_predict)
         # print(conv_matrix)
+
+        score = model.evaluate(self.X_test, self.Y_test, batch_size=self.BATCH_SIZE, verbose=self.VERBOSE)
+        print(score)        
         model.save('./Models/CNN.h5')
         return model
 
